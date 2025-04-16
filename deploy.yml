@@ -1,0 +1,16 @@
+---
+- name: Deploy Spring Boot App
+  hosts: localhost
+  tasks:
+    - name: Ensure Docker container is stopped and removed
+      docker_container:
+        name: employee-app-container
+        state: absent
+
+    - name: Run Docker container
+      docker_container:
+        name: employee-app-container
+        image: myspringboot-app:latest
+        state: started
+        ports:
+          - "8081:8081"
